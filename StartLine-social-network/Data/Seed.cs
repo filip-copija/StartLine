@@ -84,7 +84,7 @@ namespace StartLine_social_network.Data
                     {
                         new Party()
                         {
-                            Title = "Running Race 1",
+                            Title = "Party 1",
                             Image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblu-club.business.site%2F&psig=AOvVaw2EOVcoDggqTwli5gjCSufb&ust=1674498441572000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCODujPvm2_wCFQAAAAAdAAAAABAD",
                             Description = "This is a party description",
                             PartyClubCategory = PartyClubCategory.Night,
@@ -97,7 +97,7 @@ namespace StartLine_social_network.Data
                         },
                         new Party()
                         {
-                            Title = "Running Race 2",
+                            Title = "Party 2",
                             Image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblu-club.business.site%2F&psig=AOvVaw2EOVcoDggqTwli5gjCSufb&ust=1674498441572000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCODujPvm2_wCFQAAAAAdAAAAABAD",
                             Description = "This a party description",
                             PartyClubCategory = PartyClubCategory.Pub,
