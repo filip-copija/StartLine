@@ -14,7 +14,7 @@ namespace StartLine_social_network.Data
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
                 context.Database.EnsureCreated();
-                
+
                 // Clubs
 
                 if (!context.Clubs.Any())
@@ -24,7 +24,7 @@ namespace StartLine_social_network.Data
                         new Club()
                         {
                             Title = "Club 1",
-                            Image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblu-club.business.site%2F&psig=AOvVaw2EOVcoDggqTwli5gjCSufb&ust=1674498441572000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCODujPvm2_wCFQAAAAAdAAAAABAD",
+                            Image = "https://lh3.googleusercontent.com/p/AF1QipPfj9SmhAeGk1lP1RmYmiSvRIYXyyWPuYRJRH93=w1080-h608-p-no-v0",
                             Description = "The club description",
                             ClubCategory = ClubCategory.Drinking,
                             Address = new Address()
@@ -37,7 +37,7 @@ namespace StartLine_social_network.Data
                         new Club()
                         {
                             Title = "Club 2",
-                            Image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblu-club.business.site%2F&psig=AOvVaw2EOVcoDggqTwli5gjCSufb&ust=1674498441572000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCODujPvm2_wCFQAAAAAdAAAAABAD",
+                            Image = "https://lh3.googleusercontent.com/p/AF1QipPfj9SmhAeGk1lP1RmYmiSvRIYXyyWPuYRJRH93=w1080-h608-p-no-v0",
                             Description = "The club description",
                             ClubCategory = ClubCategory.Everything,
                             Address = new Address()
@@ -50,7 +50,7 @@ namespace StartLine_social_network.Data
                         new Club()
                         {
                             Title = " Club 3",
-                            Image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblu-club.business.site%2F&psig=AOvVaw2EOVcoDggqTwli5gjCSufb&ust=1674498441572000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCODujPvm2_wCFQAAAAAdAAAAABAD",
+                            Image = "https://lh3.googleusercontent.com/p/AF1QipPfj9SmhAeGk1lP1RmYmiSvRIYXyyWPuYRJRH93=w1080-h608-p-no-v0",
                             Description = "The club description",
                             ClubCategory = ClubCategory.Dancing,
                             Address = new Address()
@@ -63,7 +63,7 @@ namespace StartLine_social_network.Data
                         new Club()
                         {
                             Title = "Club 4",
-                            Image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblu-club.business.site%2F&psig=AOvVaw2EOVcoDggqTwli5gjCSufb&ust=1674498441572000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCODujPvm2_wCFQAAAAAdAAAAABAD",
+                            Image = "https://lh3.googleusercontent.com/p/AF1QipPfj9SmhAeGk1lP1RmYmiSvRIYXyyWPuYRJRH93=w1080-h608-p-no-v0",
                             Description = "The club description",
                             ClubCategory = ClubCategory.HangOut,
                             Address = new Address()
@@ -85,7 +85,7 @@ namespace StartLine_social_network.Data
                         new Party()
                         {
                             Title = "Party 1",
-                            Image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblu-club.business.site%2F&psig=AOvVaw2EOVcoDggqTwli5gjCSufb&ust=1674498441572000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCODujPvm2_wCFQAAAAAdAAAAABAD",
+                            Image = "https://lh3.googleusercontent.com/p/AF1QipPfj9SmhAeGk1lP1RmYmiSvRIYXyyWPuYRJRH93=w1080-h608-p-no-v0",
                             Description = "This is a party description",
                             PartyClubCategory = PartyClubCategory.Night,
                             Address = new Address()
@@ -98,7 +98,7 @@ namespace StartLine_social_network.Data
                         new Party()
                         {
                             Title = "Party 2",
-                            Image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblu-club.business.site%2F&psig=AOvVaw2EOVcoDggqTwli5gjCSufb&ust=1674498441572000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCODujPvm2_wCFQAAAAAdAAAAABAD",
+                            Image = "https://lh3.googleusercontent.com/p/AF1QipPfj9SmhAeGk1lP1RmYmiSvRIYXyyWPuYRJRH93=w1080-h608-p-no-v0",
                             Description = "This a party description",
                             PartyClubCategory = PartyClubCategory.Pub,
                             AddressId = 5,

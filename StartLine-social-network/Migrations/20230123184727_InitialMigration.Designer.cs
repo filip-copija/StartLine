@@ -12,8 +12,8 @@ using StartLine_social_network.Data;
 namespace StartLinesocialnetwork.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230122182026_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230123184727_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
