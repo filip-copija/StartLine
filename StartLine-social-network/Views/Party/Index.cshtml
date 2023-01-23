@@ -1,6 +1,34 @@
-﻿@*
+﻿@model IEnumerable<Party>
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
-<h1>Party Index test</h1>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var item in @Model)
+            {
+             <div class="col">
+              <div class="card shadow-sm">
+                <img class="card-img-top" src="@item.Image" width="100%" height="225" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">@item.Title</p>
+                  <p class="card-text">@item.Description</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">@item.StartTime</small>
+                    <small class="text-muted">@item.PartyClubCategory</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            }
+        </div>
+      </div>
+    </div>
