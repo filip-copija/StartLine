@@ -16,5 +16,11 @@ namespace StartLine_social_network.Controllers
             List<Club> clubs = _context.Clubs.ToList();
             return View(clubs);
         }
+        // Detail page for single element
+        public IActionResult Detail(int id)
+        {
+            Club club = _context.Clubs.FirstOrDefault(x => x.Id == id);
+            return View(club);
+        }
     }
 }
