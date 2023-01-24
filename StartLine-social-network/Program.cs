@@ -1,10 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
+using StartLine_social_network.Data.Interfaces;
+using StartLine_social_network.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add own services to the container
+builder.Services.AddScoped<IClubService, ClubService>();
+builder.Services.AddScoped<IPartyService, PartyService>();
+
+// Add AppDbContext default connection string
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

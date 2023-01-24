@@ -33,7 +33,7 @@ namespace StartLine_social_network.Service
         public async Task<Club> GetByIdAsync(int id)
         {
             // this one returns just one 
-            return await _context.Clubs.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Clubs.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<Club>> GetClubByCity(string city)

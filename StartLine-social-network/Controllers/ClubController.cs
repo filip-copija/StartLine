@@ -1,27 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
+using StartLine_social_network.Data.Interfaces;
 using StartLine_social_network.Models;
 
 namespace StartLine_social_network.Controllers
 {
     public class ClubController : Controller
     {
-        private readonly AppDbContext _context;
-        public ClubController(AppDbContext context)
+        private readonly IClubService _clubService;
+        public ClubController(IClubService clubService)
         {
-            _context = context;
+            _clubService = clubService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Club> clubs = _context.Clubs.ToList();
+            // Methods inherited by services
+            IEnumerable<Club> clubs = await _clubService.GetAllElements();
             return View(clubs);
         }
         // Detail page for single element
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
             // We use Include() to make join between Address.cs
-            Club club = _context.Clubs.Include(x => x.Address).FirstOrDefault(x => x.Id == id);
+            Club club = await _clubService.GetByIdAsync(id);
             return View(club);
         }
     }
