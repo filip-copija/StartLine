@@ -26,5 +26,19 @@ namespace StartLine_social_network.Controllers
             Club club = await _clubService.GetByIdAsync(id);
             return View(club);
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Club club)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(club);
+            }
+            _clubService.Add(club);
+            return RedirectToAction("Index");
+        }
     }
 }
