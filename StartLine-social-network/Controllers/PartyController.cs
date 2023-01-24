@@ -25,5 +25,19 @@ namespace StartLine_social_network.Controllers
             Party party = await _partyService.GetByIdAsync(id);
             return View(party);
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Party party)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(party);
+            }
+            _partyService.Add(party);
+            return RedirectToAction("Index");
+        }
     }
 }
