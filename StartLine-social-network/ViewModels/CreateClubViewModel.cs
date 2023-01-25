@@ -3,6 +3,7 @@ using StartLine_social_network.Models;
 
 namespace StartLine_social_network.ViewModels
 {
+    // Represents the data displayed on Create View. Used for uploading photos from file
     public class CreateClubViewModel
     {
         public int Id { get; set; }
