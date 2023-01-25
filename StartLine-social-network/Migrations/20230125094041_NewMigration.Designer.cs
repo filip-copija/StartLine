@@ -12,8 +12,8 @@ using StartLine_social_network.Data;
 namespace StartLinesocialnetwork.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230125053325_Identity")]
-    partial class Identity
+    [Migration("20230125094041_NewMigration")]
+    partial class NewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -191,7 +191,7 @@ namespace StartLinesocialnetwork.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -219,7 +219,7 @@ namespace StartLinesocialnetwork.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("PartyCounter")
+                    b.Property<int?>("PartyCounter")
                         .HasColumnType("int");
 
                     b.Property<string>("PasswordHash")
@@ -398,9 +398,7 @@ namespace StartLinesocialnetwork.Migrations
                 {
                     b.HasOne("StartLine_social_network.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.Navigation("Address");
                 });

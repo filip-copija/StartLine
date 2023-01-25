@@ -40,7 +40,7 @@ var app = builder.Build();
 // Allows us to se the data while running program for the first time
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
 {
-    //Seed.SeedData(app);
+    Seed.SeedData(app);
     await Seed.SeedUsersAndRolesAsync(app);
 }
 
@@ -57,6 +57,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

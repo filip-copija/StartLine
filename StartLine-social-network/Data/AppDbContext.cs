@@ -12,6 +12,6 @@ namespace StartLine_social_network.Data
         }
         public DbSet<Club> Clubs { get; set; }
         public DbSet<Party> Parties { get; set; }
-        public DbSet<Address> Addresses { get; set;  }
+        public DbSet<Address> Addresses { get; set; }
     }
 }

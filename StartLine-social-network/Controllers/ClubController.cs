@@ -72,7 +72,7 @@ namespace StartLine_social_network.Controllers
             {
                 Title = club.Title,
                 Description = club.Description,
-                AddressId = (int)club.AddressId,
+                AddressId = club.AddressId,
                 Address = club.Address,
                 URL = club.Image,
                 ClubCategory = club.ClubCategory

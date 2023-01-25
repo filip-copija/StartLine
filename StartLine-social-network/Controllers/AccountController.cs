@@ -83,7 +83,7 @@ namespace StartLine_social_network.Controllers
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
 
             if (newUserResponse.Succeeded)
-                await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+                await _userManager.AddToRoleAsync(newUser, UserRoles.Admin);
 
             return RedirectToAction("Index", "Party");
         }
