@@ -55,6 +55,7 @@ namespace StartLine_social_network.Controllers
             return View(loginViewModel);
         }
 
+        [HttpGet]
         public IActionResult Register()
         {
             var response = new RegisterViewModel();
@@ -69,7 +70,7 @@ namespace StartLine_social_network.Controllers
             var user = await _userManager.FindByEmailAsync(registerViewModel.EmailAddress);
             if (user != null)
             {
-                TempData["Error"] = "There is already a user using this email";
+                TempData["Error"] = "This email address is already in use";
                 return View(registerViewModel);
             }
 
@@ -78,18 +79,16 @@ namespace StartLine_social_network.Controllers
                 Email = registerViewModel.EmailAddress,
                 UserName = registerViewModel.EmailAddress
             };
-
-            // creates new user with a given password
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
 
             if (newUserResponse.Succeeded)
-                await _userManager.AddToRoleAsync(newUser, UserRoles.Admin);
+                await _userManager.AddToRoleAsync(newUser, UserRoles.User);
 
             return RedirectToAction("Index", "Party");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> LogOut()
+        [HttpGet]
+        public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Party");

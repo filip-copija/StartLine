@@ -16,6 +16,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddScoped<IPartyService, PartyService>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
