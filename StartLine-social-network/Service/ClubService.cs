@@ -36,6 +36,12 @@ namespace StartLine_social_network.Service
             return await _context.Clubs.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<Club> GetByIdAsyncNoTracking(int id)
+        {
+            // this one avoids problem of tracking element in the same time 
+            return await _context.Clubs.Include(x => x.Address).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<IEnumerable<Club>> GetClubByCity(string city)
         {
             // Moves from appdb > club > address and serach by the city

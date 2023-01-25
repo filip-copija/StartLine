@@ -6,6 +6,7 @@ namespace StartLine_social_network.Data.Interfaces
     {
         Task<IEnumerable<Party>> GetAllElements();
         Task<Party> GetByIdAsync(int id);
+        Task<Party> GetByIdAsyncNoTracking(int id);
         // TODO: Geolocation
         Task<IEnumerable<Party>> GetPartyCity(string city);
         bool Add(Party party);

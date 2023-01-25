@@ -61,5 +61,64 @@ namespace StartLine_social_network.Controllers
             }
             return View(partyVM);
         }
+        // Passing data to the model
+        public async Task<IActionResult> Edit(int id)
+        {
+            var party = await _partyService.GetByIdAsync(id);
+            if (party == null) return View("Error");
+
+            var partyVM = new EditPartyViewModel
+            {
+                Title = party.Title,
+                Description = party.Description,
+                AddressId = (int)party.AddressId,
+                Address = party.Address,
+                URL = party.Image,
+                PartyClubCategory = party.PartyClubCategory
+            };
+            return View(partyVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditClubViewModel partyVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Failed to edit");
+                return View("Edit", partyVM);
+            }
+            var userParty = await _partyService.GetByIdAsyncNoTracking(id);
+
+            if (userParty != null)
+            {
+                try
+                {
+                    await _photoService.DeletePhotoAsync(userParty.Image);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Could not delete the photo");
+                    return View(partyVM);
+                }
+                var photoResult = await _photoService.AddPhotoAsync(partyVM.Image);
+
+                var party = new Party
+                {
+                    Id = id,
+                    Title = partyVM.Title,
+                    Description = partyVM.Description,
+                    Image = photoResult.Url.ToString(),
+                    AddressId = partyVM.AddressId,
+                    Address = partyVM.Address,
+                };
+
+                _partyService.Update(party);
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(partyVM);
+            }
+        }
     }
 }
