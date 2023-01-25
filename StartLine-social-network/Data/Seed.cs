@@ -1,4 +1,5 @@
-﻿using StartLine_social_network.Data.Enum;
+﻿using Microsoft.AspNetCore.Identity;
+using StartLine_social_network.Data.Enum;
 using StartLine_social_network.Models;
 
 namespace StartLine_social_network.Data
@@ -111,6 +112,64 @@ namespace StartLine_social_network.Data
                         }
                     });
                     context.SaveChanges();
+                }
+            }
+        }
+
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                //Roles
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+                //Users
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+                string adminUserEmail = "filip.copija1@gmail.com";
+
+                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+                if (adminUser == null)
+                {
+                    var newAdminUser = new AppUser()
+                    {
+                        UserName = "filipcopija",
+                        Email = adminUserEmail,
+                        EmailConfirmed = true,
+                        Address = new Address()
+                        {
+                            Street = "Krótka 10",
+                            City = "Kraków",
+                            Province = "Małopolska"
+                        }
+                    };
+                    await userManager.CreateAsync(newAdminUser, "kochamasp");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
+
+                string appUserEmail = "user@example.com";
+
+                var appUser = await userManager.FindByEmailAsync(appUserEmail);
+                if (appUser == null)
+                {
+                    var newAppUser = new AppUser()
+                    {
+                        UserName = "testuser",
+                        Email = appUserEmail,
+                        EmailConfirmed = true,
+                        Address = new Address()
+                        {
+                            Street = "test",
+                            City = "test",
+                            Province = "test"
+                        }
+                    };
+                    await userManager.CreateAsync(newAppUser, "test123");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
             }
         }

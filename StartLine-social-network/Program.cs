@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
 using StartLine_social_network.Data.Interfaces;
 using StartLine_social_network.Helpers;
+using StartLine_social_network.Models;
 using StartLine_social_network.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,12 +25,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// Identity Framework
+builder.Services.AddIdentity<AppUser, IdentityRole>().
+    AddEntityFrameworkStores<AppDbContext>();
+
+// Just to avoid mistakes, tip from stackof
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+    AddCookie();
+
 var app = builder.Build();
 
 // Allows us to se the data while running program for the first time
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
 {
-    Seed.SeedData(app);
+    //Seed.SeedData(app);
+    await Seed.SeedUsersAndRolesAsync(app);
 }
 
 // Configure the HTTP request pipeline.
