@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
 using StartLine_social_network.Data.Interfaces;
+using StartLine_social_network.Extensions;
 using StartLine_social_network.Models;
 using StartLine_social_network.ViewModels;
 
@@ -11,11 +12,13 @@ namespace StartLine_social_network.Controllers
     {
         private readonly IPartyService _partyService;
         private readonly IPhotoService _photoService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PartyController(IPartyService partyService, IPhotoService photoService)
+        public PartyController(IPartyService partyService, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
         {
             _partyService = partyService;
             _photoService = photoService;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<IActionResult> Index()
         {
@@ -31,7 +34,10 @@ namespace StartLine_social_network.Controllers
         }
         public IActionResult Create()
         {
-            return View();
+            // GUID
+            var currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+            var createPartyViewModel = new CreatePartyViewModel { AppUserId = currentUserId };
+            return View(createPartyViewModel);
         }
         [HttpPost]
         public async Task<IActionResult> Create(CreatePartyViewModel partyVM)
@@ -45,6 +51,7 @@ namespace StartLine_social_network.Controllers
                     Title = partyVM.Title,
                     Description = partyVM.Description,
                     Image = result.Url.ToString(),
+                    AppUserId = partyVM.AppUserId,
                     Address = new Address
                     {
                         Street = partyVM.Address.Street,

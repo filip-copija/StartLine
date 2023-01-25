@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
 using StartLine_social_network.Data.Interfaces;
+using StartLine_social_network.Extensions;
 using StartLine_social_network.Models;
 using StartLine_social_network.ViewModels;
 
@@ -11,11 +12,13 @@ namespace StartLine_social_network.Controllers
     {
         private readonly IClubService _clubService;
         private readonly IPhotoService _photoService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ClubController(IClubService clubService, IPhotoService photoService)
+        public ClubController(IClubService clubService, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
         {
             _clubService = clubService;
             _photoService = photoService;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<IActionResult> Index()
         {
@@ -32,7 +35,10 @@ namespace StartLine_social_network.Controllers
         }
         public IActionResult Create()
         {
-            return View();
+            // GUID
+            var currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+            var createClubViewModel = new CreateClubViewModel { AppUserId = currentUserId };
+            return View(createClubViewModel);
         }
         [HttpPost]
         public async Task<IActionResult> Create(CreateClubViewModel clubVM)
@@ -46,6 +52,7 @@ namespace StartLine_social_network.Controllers
                     Title = clubVM.Title,
                     Description = clubVM.Description,
                     Image = result.Url.ToString(),
+                    AppUserId = clubVM.AppUserId,
                     Address = new Address
                     { 
                         Street = clubVM.Address.Street,

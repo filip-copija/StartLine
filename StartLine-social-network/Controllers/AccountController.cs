@@ -91,7 +91,7 @@ namespace StartLine_social_network.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Party");
+            return RedirectToAction("Index", "Club");
         }
     }
 }
