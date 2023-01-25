@@ -20,39 +20,40 @@ namespace StartLine_social_network.Controllers
             _context = context;
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             var response = new LoginViewModel();
             return View(response);
         }
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel loginVM)
-        {
-            if (!ModelState.IsValid) return View(loginVM);
 
-            var user = await _userManager.FindByEmailAsync(loginVM.Username);
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        {
+            if (!ModelState.IsValid) return View(loginViewModel);
+
+            var user = await _userManager.FindByEmailAsync(loginViewModel.EmailAddress);
 
             if (user != null)
             {
-                // User exists, checking password here
-                var passCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
-                if (passCheck)
+                //User is found, check password
+                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginViewModel.Password);
+                if (passwordCheck)
                 {
-                    // Password correcnt, signing in
-                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                    //Password correct, sign in
+                    var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Party"); // Action name, Controller name
+                        return RedirectToAction("Index", "Club");
                     }
                 }
-                // Password incorrect
-                TempData["Error"] = "Login or password is incorrect. Please try again";
-                // Try again
-                return View(loginVM);
+                //Password is incorrect
+                TempData["Error"] = "Wrong credentials. Please try again";
+                return View(loginViewModel);
             }
-            // Not found
-            TempData["Error"] = "Login or password is incorrect. Please try again";
-            return View(loginVM);
+            //User not found
+            TempData["Error"] = "Wrong credentials. Please try again";
+            return View(loginViewModel);
         }
     }
 }
