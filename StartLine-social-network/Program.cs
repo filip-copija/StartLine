@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
 using StartLine_social_network.Data.Interfaces;
+using StartLine_social_network.Helpers;
 using StartLine_social_network.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddControllersWithViews();
 // Add own services to the container
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddScoped<IPartyService, PartyService>();
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 // Add AppDbContext default connection string
 builder.Services.AddDbContext<AppDbContext>(options =>
