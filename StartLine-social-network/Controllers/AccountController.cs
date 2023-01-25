@@ -82,16 +82,18 @@ namespace StartLine_social_network.Controllers
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
 
             if (newUserResponse.Succeeded)
+            {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-
-            return RedirectToAction("Index", "Party");
+                return RedirectToAction("Index", "Home");
+            }
+            return View(registerViewModel);
         }
 
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Club");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
