@@ -3,15 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
 using StartLine_social_network.Data.Interfaces;
 using StartLine_social_network.Models;
+using StartLine_social_network.ViewModels;
 
 namespace StartLine_social_network.Controllers
 {
     public class PartyController : Controller
     {
         private readonly IPartyService _partyService;
-        public PartyController(IPartyService partyService)
+        private readonly IPhotoService _photoService;
+
+        public PartyController(IPartyService partyService, IPhotoService photoService)
         {
             _partyService = partyService;
+            _photoService = photoService;
         }
         public async Task<IActionResult> Index()
         {
@@ -30,14 +34,32 @@ namespace StartLine_social_network.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Party party)
+        public async Task<IActionResult> Create(CreatePartyViewModel partyVM)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(party);
+                var result = await _photoService.AddPhotoAsync(partyVM.Image);
+
+                var party = new Party
+                {
+                    Title = partyVM.Title,
+                    Description = partyVM.Description,
+                    Image = result.Url.ToString(),
+                    Address = new Address
+                    {
+                        Street = partyVM.Address.Street,
+                        City = partyVM.Address.City,
+                        Province = partyVM.Address.Province,
+                    }
+                };
+                _partyService.Add(party);
+                return RedirectToAction("Index");
             }
-            _partyService.Add(party);
-            return RedirectToAction("Index");
+            else
+            {
+                ModelState.AddModelError("", "Photo upload failed");
+            }
+            return View(partyVM);
         }
     }
 }

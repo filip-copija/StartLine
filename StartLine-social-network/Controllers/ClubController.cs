@@ -3,15 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
 using StartLine_social_network.Data.Interfaces;
 using StartLine_social_network.Models;
+using StartLine_social_network.ViewModels;
 
 namespace StartLine_social_network.Controllers
 {
     public class ClubController : Controller
     {
         private readonly IClubService _clubService;
-        public ClubController(IClubService clubService)
+        private readonly IPhotoService _photoService;
+
+        public ClubController(IClubService clubService, IPhotoService photoService)
         {
             _clubService = clubService;
+            _photoService = photoService;
         }
         public async Task<IActionResult> Index()
         {
@@ -31,14 +35,32 @@ namespace StartLine_social_network.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Club club)
+        public async Task<IActionResult> Create(CreateClubViewModel clubVM)
         {
-            if(!ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                return View(club);
+                var result = await _photoService.AddPhotoAsync(clubVM.Image);
+
+                var club = new Club
+                { 
+                    Title = clubVM.Title,
+                    Description = clubVM.Description,
+                    Image = result.Url.ToString(),
+                    Address = new Address
+                    { 
+                        Street = clubVM.Address.Street,
+                        City = clubVM.Address.City,
+                        Province = clubVM.Address.Province,
+                    }
+                };
+                _clubService.Add(club);
+                return RedirectToAction("Index");
+            }         
+            else
+            {
+                ModelState.AddModelError("", "Photo upload failed");
             }
-            _clubService.Add(club);
-            return RedirectToAction("Index");
+            return View(clubVM);
         }
     }
 }

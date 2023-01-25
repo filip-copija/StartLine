@@ -12,6 +12,8 @@ builder.Services.AddControllersWithViews();
 // Add own services to the container
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddScoped<IPartyService, PartyService>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 // Add AppDbContext default connection string

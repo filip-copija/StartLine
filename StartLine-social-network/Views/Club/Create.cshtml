@@ -1,11 +1,12 @@
 ﻿@using StartLine_social_network.Data.Enum
-@model Club
+@using StartLine_social_network.ViewModels
+@model CreateClubViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Create" enctype="multipart/form-data">
   <div class="form-group">
     <label asp-for="Title">Title</label>
     <input asp-for="Title" class="form-control" placeholder="Title">
@@ -16,14 +17,9 @@
     <input asp-for="Description" class="form-control" placeholder="Description">
     <span asp-validation-for="Description" class="text-danger"></span>
   </div>
-  <div class="form-group">
-    <label asp-for="Image">Image</label>
-    <input asp-for="Image" class="form-control" placeholder="Image">
-    <span asp-validation-for="Image" class="text-danger"></span>
-  </div>
     <div class="form-group">
     <label asp-for="ClubCategory">Category</label>
-    <select asp-for="ClubCategory" asp-items="@Html.GetEnumSelectList<ClubCategory>()" class="form-control form-control-lg">
+    <select asp-for="ClubCategory" asp-items="@Html.GetEnumSelectList<ClubCategory>()" class="form-control">
         <option>--Select--</option>
     </select>
     <span asp-validation-for="ClubCategory" class="text-danger"></span>
@@ -42,6 +38,11 @@
     <label asp-for="Address.Province">Province</label>
     <input asp-for="Address.Province" class="form-control" placeholder="Province">
     <span asp-validation-for="Address.Province" class="text-danger"></span>
+  </div>
+    <div class="form-group">
+    <label asp-for="Image">Image</label>
+    <input asp-for="Image" type="file" class="form-control" placeholder="Image">
+    <span asp-validation-for="Image" class="text-danger"></span>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
