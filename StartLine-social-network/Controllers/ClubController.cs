@@ -121,5 +121,21 @@ namespace StartLine_social_network.Controllers
                 return View(clubVM);
             }
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var clubInfo = await _clubService.GetByIdAsync(id);
+            if (clubInfo == null) return View("Error");
+            return View(clubInfo);
+        }
+        [HttpPost, ActionName("Delete")]
+        // Delete data
+        public async Task<IActionResult> DeleteClub(int id)
+        {
+            var clubInfo = await _clubService.GetByIdAsync(id);
+            if (clubInfo == null) return View("Error");
+
+            _clubService.Delete(clubInfo);
+            return RedirectToAction("Index");
+        }
     }
 }
