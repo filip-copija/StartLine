@@ -20,7 +20,6 @@ namespace StartLine_social_network.Controllers
             _context = context;
         }
 
-        [HttpGet]
         public IActionResult Login()
         {
             var response = new LoginViewModel();
@@ -44,7 +43,7 @@ namespace StartLine_social_network.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Club");
+                        return RedirectToAction("Index", "Party"); // action, controller
                     }
                 }
                 //Password is incorrect
@@ -54,6 +53,46 @@ namespace StartLine_social_network.Controllers
             //User not found
             TempData["Error"] = "Wrong credentials. Please try again";
             return View(loginViewModel);
+        }
+
+        public IActionResult Register()
+        {
+            var response = new RegisterViewModel();
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
+        {
+            if (!ModelState.IsValid) return View(registerViewModel);
+
+            var user = await _userManager.FindByEmailAsync(registerViewModel.EmailAddress);
+            if (user != null)
+            {
+                TempData["Error"] = "There is already a user using this email";
+                return View(registerViewModel);
+            }
+
+            var newUser = new AppUser()
+            {
+                Email = registerViewModel.EmailAddress,
+                UserName = registerViewModel.EmailAddress
+            };
+
+            // creates new user with a given password
+            var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
+
+            if (newUserResponse.Succeeded)
+                await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+
+            return RedirectToAction("Index", "Party");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Party");
         }
     }
 }
