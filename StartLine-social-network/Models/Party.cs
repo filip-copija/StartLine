@@ -17,7 +17,7 @@ namespace StartLine_social_network.Models
         public string? Facebook { get; set; }
         public string? Contact { get; set; }
         [ForeignKey("Address")]
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public Address Address { get; set; }
         public PartyClubCategory PartyClubCategory { get; set; }
         [ForeignKey("AppUser")]
