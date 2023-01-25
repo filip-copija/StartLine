@@ -1,5 +1,6 @@
 ﻿using StartLine_social_network.Data;
 using StartLine_social_network.Data.Interfaces;
+using StartLine_social_network.Extensions;
 using StartLine_social_network.Models;
 
 namespace StartLine_social_network.Service
@@ -15,15 +16,15 @@ namespace StartLine_social_network.Service
         }
         public async Task<List<Club>> GetAllUserClubs()
         {
-            var currentUser = _httpContextAccessor.HttpContext?.User;
-            var userClubs = _context.Clubs.Where(x => x.AppUser.Id == currentUser.ToString());
+            var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+            var userClubs = _context.Clubs.Where(x => x.AppUser.Id == currentUser);
             return userClubs.ToList();
         }
 
         public async Task<List<Party>> GetAllUserParties()
         {
-            var currentUser = _httpContextAccessor.HttpContext?.User;
-            var userParties = _context.Parties.Where(x => x.AppUser.Id == currentUser.ToString());
+            var currentUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+            var userParties = _context.Parties.Where(x => x.AppUser.Id == currentUser);
             return userParties.ToList();
         }
     }
