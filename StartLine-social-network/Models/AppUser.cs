@@ -7,7 +7,7 @@ namespace StartLine_social_network.Models
 {
     public class AppUser : IdentityUser
     {
-        public string ProfileName { get; set; }
+        public string? ProfileName { get; set; }
         [ForeignKey("Address")]
         public int? AddressId { get; set; }
         public Address? Address { get; set; }

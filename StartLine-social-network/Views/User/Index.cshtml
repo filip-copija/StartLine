@@ -1,0 +1,29 @@
+﻿@using StartLine_social_network.ViewModels
+@model List<UserViewModel>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var item in @Model)
+            {
+                 <div class="col">
+                  <div class="card shadow-sm">   
+                    <div class="card-body">
+                      <p class="card-text">@item.UserName</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <a type="btn button-success" asp-controller="User" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Details</a>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                            {
+                                <a type=" btn button-success" asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a type=" btn button-danger" asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                            }
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            }
+        </div>
+      </div>
+    </div>
