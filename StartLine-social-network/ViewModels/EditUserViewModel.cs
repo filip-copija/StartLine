@@ -2,7 +2,7 @@
 
 namespace StartLine_social_network.ViewModels
 {
-    public class EditUserDashboardViewModel
+    public class EditUserViewModel
     {
         public string? Id { get; set; }
         public string? ProfileName { get; set; }

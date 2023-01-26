@@ -13,10 +13,9 @@ namespace StartLine_social_network.Controllers
         private readonly IDashboardService _dashboardService;
         private readonly IPhotoService _photoService;
 
-        public DashboardController(IDashboardService dashboardRespository, IPhotoService photoService)
+        public DashboardController(IDashboardService dashboardService, IPhotoService photoService)
         {
-            _dashboardService = dashboardRespository;
-            _photoService = photoService;
+            _dashboardService = dashboardService;
         }
 
         public async Task<IActionResult> Index()

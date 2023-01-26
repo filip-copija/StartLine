@@ -69,7 +69,7 @@ namespace StartLine_social_network.Controllers
                 return View("Error");
             }
 
-            var editVM = new EditUserDashboardViewModel()
+            var editVM = new EditUserViewModel()
             {
                 Id = user.Id,
                 ProfileName = user.ProfileName,
@@ -81,7 +81,7 @@ namespace StartLine_social_network.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> EditProfile(EditUserDashboardViewModel editVM)
+        public async Task<IActionResult> EditProfile(EditUserViewModel editVM)
         {
             if (!ModelState.IsValid)
             {
