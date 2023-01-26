@@ -21,7 +21,8 @@ namespace StartLine_social_network.Controllers
                 var userViewModel = new UserViewModel()
                 {
                     Id = user.Id,
-                    UserName = user.UserName
+                    UserName = user.UserName,
+                    ProfileImageUrl = user.ProfileImageUrl
                 };
                 result.Add(userViewModel);
             }
