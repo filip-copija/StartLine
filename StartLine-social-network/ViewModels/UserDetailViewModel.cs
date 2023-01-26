@@ -4,7 +4,7 @@ namespace StartLine_social_network.ViewModels
 {
     public class UserDetailViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }
         public int? AddressId { get; set; }
         public Address Address { get; set; }

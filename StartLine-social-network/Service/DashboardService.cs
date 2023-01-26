@@ -28,7 +28,7 @@ namespace StartLine_social_network.Service
             var userParties = _context.Parties.Where(x => x.AppUser.Id == currentUser);
             return userParties.ToList();
         }
-        public async Task<AppUser> GetUsedById(string id)
+        public async Task<AppUser> GetUserById(string id)
         {
             return await _context.Users.FindAsync(id);
         }

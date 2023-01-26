@@ -154,7 +154,7 @@ namespace StartLine_social_network.Controllers
         }
         [HttpPost, ActionName("Delete")]
         // Delete data
-        public async Task<IActionResult> DeleteClub(int id)
+        public async Task<IActionResult> DeleteParty(int id)
         {
             var partyInfo = await _partyService.GetByIdAsync(id);
             if (partyInfo == null) return View("Error");
