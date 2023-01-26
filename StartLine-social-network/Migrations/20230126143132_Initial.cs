@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StartLinesocialnetwork.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,8 @@ namespace StartLinesocialnetwork.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Province = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -45,8 +45,9 @@ namespace StartLinesocialnetwork.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PartyCounter = table.Column<int>(type: "int", nullable: true),
+                    ProfileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressId = table.Column<int>(type: "int", nullable: true),
+                    ProfileImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -212,15 +213,15 @@ namespace StartLinesocialnetwork.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EntryFee = table.Column<int>(type: "int", nullable: true),
                     Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Facebook = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: true),
                     PartyClubCategory = table.Column<int>(type: "int", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -231,8 +232,7 @@ namespace StartLinesocialnetwork.Migrations
                         name: "FK_Parties_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Parties_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,

@@ -35,20 +35,17 @@
                     <li class="list__link">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Party" asp-action="Index">Parties</a>
                     </li>
+                    <li class="list__link">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>
+                    </li>
+                    <li class="list__link">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard<br>create</a>
+                    </li>
                 }
-             
-               
-                <li class="list__link">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
-                </li>
-                 <li class="list__link">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Orders</a>
-                </li>
-                <li class="list__link">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                </li>
             </ul>
         </div>
+
+
     </header>
             @RenderBody()
     <footer class="footer">Filip Copija 13618 </footer>
