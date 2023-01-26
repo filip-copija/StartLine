@@ -1,49 +1,73 @@
 ﻿@using StartLine_social_network.Data.Enum
 @using StartLine_social_network.ViewModels
 @model CreatePartyViewModel
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+
 <form method="post" asp-action="Create" enctype="multipart/form-data">
   <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId"/>
+
   <div class="form-group">
     <label asp-for="Title">Title</label>
     <input asp-for="Title" class="form-control" placeholder="Title">
     <span asp-validation-for="Title" class="text-danger"></span>
   </div>
+
   <div class="form-group">
     <label asp-for="Description">Description</label>
     <input asp-for="Description" class="form-control" placeholder="Description">
     <span asp-validation-for="Description" class="text-danger"></span>
   </div>
+
     <div class="form-group">
     <label asp-for="PartyClubCategory">Category</label>
-    <select asp-for="PartyClubCategory" asp-items="@Html.GetEnumSelectList<PartyClubCategory>()" class="form-control">
-        <option>--Select--</option>
+    <select asp-for="PartyClubCategory" asp-items="@Html.GetEnumSelectList<PartyClubCategory>()" 
+        class="form-control">
     </select>
     <span asp-validation-for="PartyClubCategory" class="text-danger"></span>
   </div>
+
   <div class="form-group">
-    <label asp-for="Address.Street">Street</label>
-    <input asp-for="Address.Street" class="form-control" placeholder="Street">
-    <span asp-validation-for="Address.Street" class="text-danger"></span>
-  </div>
-   <div class="form-group">
     <label asp-for="Address.City">City</label>
     <input asp-for="Address.City" class="form-control" placeholder="City">
     <span asp-validation-for="Address.City" class="text-danger"></span>
   </div>
+
+  <div class="form-group">
+    <label asp-for="Address.Street">Street</label>
+    <input asp-for="Address.Street" class="form-control" placeholder="Street">
+    <span asp-validation-for="Address.Street" class="text-danger"></span>
+  </div>   
+
    <div class="form-group">
     <label asp-for="Address.Province">Province</label>
     <input asp-for="Address.Province" class="form-control" placeholder="Province">
     <span asp-validation-for="Address.Province" class="text-danger"></span>
   </div>
-    <div class="form-group">
+
+   <div class="form-group">
+    <label asp-for="EntryFee">Entry fee</label>
+    <input asp-for="EntryFee" class="form-control" placeholder="EntryFee">
+  </div>
+
+   <div class="form-group">
+    <label asp-for="Website">Website</label>
+    <input asp-for="Website" class="form-control" placeholder="Website">
+  </div>
+
+   <div class="form-group">
+    <label asp-for="Facebook">Faceook</label>
+    <input asp-for="Facebook" class="form-control" placeholder="Facebook">
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Contact">Contact</label>
+    <input asp-for="Contact" class="form-control" placeholder="Contact">
+  </div>
+
+  <div class="form-group">
     <label asp-for="Image">Image</label>
     <input asp-for="Image" type="file" class="form-control" placeholder="Image">
     <span asp-validation-for="Image" class="text-danger"></span>
   </div>
+
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

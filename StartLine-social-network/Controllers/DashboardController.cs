@@ -18,9 +18,12 @@ namespace StartLine_social_network.Controllers
             user.Id = editVM.Id;
             user.ProfileName = editVM.ProfileName;
             user.ProfileImageUrl = photoResult.Url.ToString();
-            user.City = editVM.City;
-            user.Street = editVM.Street;
-            user.Province = editVM.Province;
+            Address address = new Address()
+            {
+                City = editVM.Address.City,
+                Street = editVM.Address.Street,
+                Province = editVM.Address.Province,
+            };
         }
 
         public DashboardController(IDashboardService dashboardService, IHttpContextAccessor httpContextAccessor,
@@ -52,9 +55,12 @@ namespace StartLine_social_network.Controllers
                 Id = currentUserId,
                 ProfileName = user.ProfileName,
                 ProfileImageUrl = user.ProfileImageUrl,
-                City = user.City,
-                Street = user.Street,
-                Province = user.Province
+                Address = new Address()
+                {
+                    City = user.Address.City,
+                    Street = user.Address.Street,
+                    Province = user.Address.Province,
+                },
             };
             return View(editUserViewModel);
         }

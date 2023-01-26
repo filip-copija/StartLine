@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StartLine_social_network.Data.Interfaces;
+using StartLine_social_network.Models;
 using StartLine_social_network.ViewModels;
 
 namespace StartLine_social_network.Controllers
@@ -20,9 +21,15 @@ namespace StartLine_social_network.Controllers
             {
                 var userViewModel = new UserViewModel()
                 {
-                    Id = user.Id,
                     UserName = user.UserName,
-                    ProfileImageUrl = user.ProfileImageUrl
+                    AddressId = user.AddressId,
+                    Address = new Address
+                    {
+                        City = user.Address.City,
+                        Street = user.Address.Street,
+                        Province = user.Address.Province,
+                    },
+                    ProfileImageUrl = user.ProfileImageUrl,
                 };
                 result.Add(userViewModel);
             }
@@ -33,8 +40,15 @@ namespace StartLine_social_network.Controllers
             var user = await _userService.GetUserById(id);
             var userDetailViewModel = new UserDetailViewModel()
             {
-                Id = user.Id,
-                UserName = user.UserName
+                UserName = user.UserName,
+                AddressId = user.AddressId,
+                Address = new Address
+                {
+                    City = user.Address.City,
+                    Street = user.Address.Street,
+                    Province = user.Address.Province,
+                },
+                ProfileImageUrl = user.ProfileImageUrl,
             };
             return View(userDetailViewModel);
         }

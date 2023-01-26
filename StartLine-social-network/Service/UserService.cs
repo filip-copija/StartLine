@@ -15,12 +15,14 @@ namespace StartLine_social_network.Service
         }
         public bool Add(AppUser user)
         {
-            throw new NotImplementedException();
+            _context.Add(user);
+            return Save();
         }
 
         public bool Delete(AppUser user)
         {
-            throw new NotImplementedException();
+            _context.Remove(user);
+            return Save();
         }
 
         public async Task<IEnumerable<AppUser>> GetAllUsers()

@@ -34,7 +34,7 @@ namespace StartLine_social_network.Controllers
         }
         public IActionResult Create()
         {
-            // GUID
+            // GUID - A Globally Unique Identifier 
             var currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
             var createPartyViewModel = new CreatePartyViewModel { AppUserId = currentUserId };
             return View(createPartyViewModel);
@@ -54,10 +54,15 @@ namespace StartLine_social_network.Controllers
                     AppUserId = partyVM.AppUserId,
                     Address = new Address
                     {
-                        Street = partyVM.Address.Street,
                         City = partyVM.Address.City,
+                        Street = partyVM.Address.Street,                       
                         Province = partyVM.Address.Province,
-                    }
+                    },
+                    EntryFee = partyVM.EntryFee,
+                    Website = partyVM.Website,
+                    Facebook = partyVM.Facebook,
+                    Contact = partyVM.Contact,
+                    PartyClubCategory = partyVM.PartyClubCategory,
                 };
                 _partyService.Add(party);
                 return RedirectToAction("Index");
@@ -78,10 +83,19 @@ namespace StartLine_social_network.Controllers
             {
                 Title = party.Title,
                 Description = party.Description,
-                AddressId = (int)party.AddressId,
-                Address = party.Address,
                 URL = party.Image,
-                PartyClubCategory = party.PartyClubCategory
+                AddressId = party.AddressId,
+                Address = new Address
+                {
+                    City = party.Address.City,
+                    Street = party.Address.Street,
+                    Province = party.Address.Province,
+                },                
+                EntryFee = party.EntryFee,
+                Website = party.Website,
+                Facebook = party.Facebook,
+                Contact = party.Contact,
+                PartyClubCategory = party.PartyClubCategory,
             };
             return View(partyVM);
         }
@@ -113,9 +127,14 @@ namespace StartLine_social_network.Controllers
                     Id = id,
                     Title = partyVM.Title,
                     Description = partyVM.Description,
-                    Image = photoResult.Url.ToString(),
+                    Image = photoResult.Url.ToString(),                 
                     AddressId = partyVM.AddressId,
-                    Address = partyVM.Address,
+                    Address = new Address
+                    {
+                        City = partyVM.Address.City,
+                        Street = partyVM.Address.Street,
+                        Province = partyVM.Address.Province,
+                    },             
                 };
 
                 _partyService.Update(party);
@@ -141,6 +160,10 @@ namespace StartLine_social_network.Controllers
             if (partyInfo == null) return View("Error");
 
             _partyService.Delete(partyInfo);
+            return RedirectToAction("Index");
+        }
+        public IActionResult Return()
+        {
             return RedirectToAction("Index");
         }
     }

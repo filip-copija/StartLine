@@ -35,7 +35,7 @@ namespace StartLine_social_network.Controllers
         }
         public IActionResult Create()
         {
-            // GUID
+            // GUID - A Globally Unique Identifier 
             var currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
             var createClubViewModel = new CreateClubViewModel { AppUserId = currentUserId };
             return View(createClubViewModel);
@@ -54,11 +54,12 @@ namespace StartLine_social_network.Controllers
                     Image = result.Url.ToString(),
                     AppUserId = clubVM.AppUserId,
                     Address = new Address
-                    { 
-                        Street = clubVM.Address.Street,
+                    {
                         City = clubVM.Address.City,
+                        Street = clubVM.Address.Street,                     
                         Province = clubVM.Address.Province,
-                    }
+                    },
+                    ClubCategory = clubVM.ClubCategory,
                 };
                 _clubService.Add(club);
                 return RedirectToAction("Index");
@@ -79,9 +80,14 @@ namespace StartLine_social_network.Controllers
             {
                 Title = club.Title,
                 Description = club.Description,
-                AddressId = club.AddressId,
-                Address = club.Address,
                 URL = club.Image,
+                AddressId = club.AddressId,
+                Address = new Address
+                {
+                    City = club.Address.City,
+                    Street = club.Address.Street,
+                    Province = club.Address.Province,
+                },               
                 ClubCategory = club.ClubCategory
             };
             return View(clubVM);
@@ -92,7 +98,7 @@ namespace StartLine_social_network.Controllers
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Failed to edit");
-                return View("Edit", clubVM);
+                return View("Edit", clubVM); // view, model
             }
             var userClub = await _clubService.GetByIdAsyncNoTracking(id);
 
@@ -104,7 +110,7 @@ namespace StartLine_social_network.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Could not delete the photo");
+                    ModelState.AddModelError("", "There was a problem occurred while making this action");
                     return View(clubVM);
                 }
                 var photoResult = await _photoService.AddPhotoAsync(clubVM.Image);
@@ -116,7 +122,13 @@ namespace StartLine_social_network.Controllers
                     Description = clubVM.Description,
                     Image = photoResult.Url.ToString(),
                     AddressId = clubVM.AddressId,
-                    Address = clubVM.Address,
+                    Address = new Address
+                    {
+                        City = clubVM.Address.City,
+                        Street = clubVM.Address.Street,
+                        Province = clubVM.Address.Province,
+                    },
+                    ClubCategory = clubVM.ClubCategory,
                 };
 
                 _clubService.Update(club);
@@ -142,6 +154,10 @@ namespace StartLine_social_network.Controllers
             if (clubInfo == null) return View("Error");
 
             _clubService.Delete(clubInfo);
+            return RedirectToAction("Index");
+        }
+        public IActionResult Return()
+        {
             return RedirectToAction("Index");
         }
     }

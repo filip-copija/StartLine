@@ -1,35 +1,23 @@
 ﻿@using StartLine_social_network.Data.Enum
 @model Party
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<h1>Are you sure you want to delete this item?</h1>
- 
-    <!-- Portfolio Item Row -->
-    <div class="row">
-  
-      <div class="col-md-8">
-        <img class="img-fluid" src="@Model.Image" alt="">
-      </div>
-  
-      <div class="col-md-4">
-        <h3 class="my-3">@Model.Title</h3>
-        <p>@Model.Description</p>
-        <h3 class="my-3">Location</h3>
-        <ul>
-          <li>@Model.Address.City</li>
-          <li>@Model.Address.Province</li>
-          <li>@Model.PartyClubCategory</li>
-        </ul>
-      </div> 
-    </div>
 
-  <div class="form-group">
-   <form action="Delete" method="post">
-       <!-- posting hidden id-->
-       <input type="hidden" asp-for="Id"/>
-       <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3"/>
-   </form>
-  </div>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">    
+  <asp:Panel ID="pnlAlertBox" runat="server" style="position absolute top 0">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Notification</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete @Model.Title?
+                </div>
+                <div class="modal-footer">
+                <form action="Delete" method="post">
+                    <input type="hidden" asp-for="Id"/>
+                        <a type="btn button-success" asp-controller="Party" asp-action="Return" class="btn btn-outline-secondary mt-3">Return</a>
+                        <input type="submit" class="btn btn-outline-danger mt-3" Text="Delete"/>
+                </form>
+                </div>
+            </div>
+        </div>
+</asp:Panel>

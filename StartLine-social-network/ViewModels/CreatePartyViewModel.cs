@@ -7,11 +7,15 @@ namespace StartLine_social_network.ViewModels
     public class CreatePartyViewModel
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string AppUserId { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public IFormFile? Image { get; set; }
+        public string? AppUserId { get; set; }
         public Address Address { get; set; }
-        public IFormFile Image { get; set; }
+        public int? EntryFee { get; set; }
+        public string? Website { get; set; }
+        public string? Facebook { get; set; }
+        public string? Contact { get; set; }
         public PartyClubCategory PartyClubCategory { get; set; }
     }
 }
