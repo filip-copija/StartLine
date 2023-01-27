@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:22650",
+      "applicationUrl": "02.54.94.97     rhino.acme.com          # source server",
       "sslPort": 44333
     }
   },

@@ -106,8 +106,8 @@ namespace StartLine_social_network.Data
                             Address = new Address()
                             {
                                Street = "Długa 12",
-                                City = "Kraków",
-                                Province = "Małopolska"
+                               City = "Kraków",
+                               Province = "Małopolska"
                             }
                         }
                     });
@@ -130,22 +130,16 @@ namespace StartLine_social_network.Data
 
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-                string adminUserEmail = "teddysmithdeveloper@gmail.com";
+                string adminUserEmail = "fico@admin.net";
 
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
                 {
                     var newAdminUser = new AppUser()
                     {
-                        UserName = "teddysmithdev",
+                        UserName = "fico",
                         Email = adminUserEmail,
-                        EmailConfirmed = true,
-                        Address = new Address()
-                        {
-                            Street = "123 Main St",
-                            City = "Charlotte",
-                            Province = "NC"
-                        }
+                        EmailConfirmed = true,                  
                     };
                     await userManager.CreateAsync(newAdminUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
@@ -161,12 +155,6 @@ namespace StartLine_social_network.Data
                         UserName = "app-user",
                         Email = appUserEmail,
                         EmailConfirmed = true,
-                        Address = new Address()
-                        {
-                            Street = "123 Main St",
-                            City = "Charlotte",
-                            Province = "NC"
-                        }
                     };
                     await userManager.CreateAsync(newAppUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);

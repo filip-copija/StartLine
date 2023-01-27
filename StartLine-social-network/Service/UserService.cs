@@ -13,16 +13,15 @@ namespace StartLine_social_network.Service
         {
             _context = context;
         }
+
         public bool Add(AppUser user)
         {
-            _context.Add(user);
-            return Save();
+            throw new NotImplementedException();
         }
 
         public bool Delete(AppUser user)
         {
-            _context.Remove(user);
-            return Save();
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<AppUser>> GetAllUsers()
@@ -38,8 +37,7 @@ namespace StartLine_social_network.Service
         public bool Save()
         {
             var saved = _context.SaveChanges();
-            if (saved > 0) return true;
-            else return false;
+            return saved > 0 ? true : false;
         }
 
         public bool Update(AppUser user)

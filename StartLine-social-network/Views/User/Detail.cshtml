@@ -1,60 +1,70 @@
 ﻿@using StartLine_social_network.ViewModels
+
 @model UserDetailViewModel
 
-<!-- Page Content -->
-<div class="container">
 
-    <!-- Portfolio Item Heading -->
-    <h1 class="my-4">Page Heading
-      <small>Secondary Text</small>
-    </h1>
-  
-    <!-- Portfolio Item Row -->
-    <div class="row">
-      <div class="col-md-4">
-        <h3 class="my-3">@Model.Id</h3>
-        <p>@Model.UserName</p>
-        <h3 class="my-3">Location</h3>
-        <ul>
-          <li>@Model.Address.City</li>
-          <li>@Model.Address.Province</li>
-        </ul>
-      </div>
-  
-    </div>
-    <!-- /.row -->
-  
-    <!-- Related Projects Row -->
-    <h3 class="my-4">Related Projects</h3>
-  
-    <div class="row">
-  
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-              <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
-            </a>
-      </div>
-  
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-              <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
-            </a>
-      </div>
-  
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-              <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
-            </a>
-      </div>
-  
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="#">
-              <img class="img-fluid" src="https://via.placeholder.com/500x300" alt="">
-            </a>
-      </div>
-  
-    </div>
-    <!-- /.row -->
-  
-  </div>
-  <!-- /.container -->
+<div class="main-container">
+    <nav aria-label="breadcrumb" role="navigation" class="bg-primary text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <ol>
+                        <li>
+                            <a>Home</a>
+                        </li>
+                        <li>
+                            <a">Clubbers</a>
+                        </li>
+                        <li>Profile</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <img alt="Image" src="@Model.ProfileImageUrl">
+                        <div>
+                            <div >
+                                <h1>@Model.UserName</h1>
+                                <span>@Model.City</span>
+                            </div>
+                            <p>
+                                test test test
+                            </p>
+                            <div>
+                                <button class="btn btn-outline-primary></button>
+                                <button class="btn btn-outline-primary"></button>
+                                <div>
+                                    <div>
+                                        <a class>Add to group</a>
+                                        <a class>Share Profile</a>
+                                        <a class>Block</a>
+                                        <a class>Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section>
+        <div>
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" aria-controls="followers" aria-selected="false">Followers</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

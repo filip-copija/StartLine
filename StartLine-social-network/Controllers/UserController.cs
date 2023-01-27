@@ -9,30 +9,31 @@ namespace StartLine_social_network.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IUserService _userRepository;
         private readonly UserManager<AppUser> _userManager;
         private readonly IPhotoService _photoService;
 
-        public UserController(IUserService userRepository, UserManager<AppUser> userManager, IPhotoService photoService)
+        public UserController(IUserService userService, UserManager<AppUser> userManager, IPhotoService photoService)
         {
-            _userService = userRepository;
+            _userRepository = userService;
             _userManager = userManager;
             _photoService = photoService;
         }
 
-        [HttpGet("Users")]
+        [HttpGet("users")]
         public async Task<IActionResult> Index()
         {
-            var users = await _userService.GetAllUsers();
+            var users = await _userRepository.GetAllUsers();
             List<UserViewModel> result = new List<UserViewModel>();
-            foreach (var user in result)
+            foreach (var user in users)
             {
                 var userViewModel = new UserViewModel()
                 {
                     Id = user.Id,
+                    City = user.City,
+                    Province = user.Province,
                     UserName = user.UserName,
-                    Address = user.Address,
-                    ProfileImageUrl = user.ProfileImageUrl ?? "/resources/avatar-male.jpg",
+                    ProfileImageUrl = user.ProfileImageUrl ?? "\\resources\\avatar-male.jpg",
                 };
                 result.Add(userViewModel);
             }
@@ -42,7 +43,7 @@ namespace StartLine_social_network.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(string id)
         {
-            var user = await _userService.GetUserById(id);
+            var user = await _userRepository.GetUserById(id);
             if (user == null)
             {
                 return RedirectToAction("Index", "Users");
@@ -51,9 +52,10 @@ namespace StartLine_social_network.Controllers
             var userDetailViewModel = new UserDetailViewModel()
             {
                 Id = user.Id,
+                City = user.City,
+                Province = user.Province,
                 UserName = user.UserName,
-                Address = user.Address,
-                ProfileImageUrl = user.ProfileImageUrl ?? "/resources/avatar-male.jpg",
+                ProfileImageUrl = user.ProfileImageUrl ?? "\\resources\\avatar-male.jpg",
             };
             return View(userDetailViewModel);
         }
@@ -69,19 +71,17 @@ namespace StartLine_social_network.Controllers
                 return View("Error");
             }
 
-            var editVM = new EditUserViewModel()
+            var editMV = new EditProfileViewModel()
             {
-                Id = user.Id,
-                ProfileName = user.ProfileName,
-                ProfileImageUrl = user.ProfileImageUrl,
-                Address = user.Address,
+                UserName = user.UserName,
+                ProfileImageUrl = user.ProfileImageUrl
             };
-            return View(editVM);
+            return View(editMV);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> EditProfile(EditUserViewModel editVM)
+        public async Task<IActionResult> EditProfile(EditProfileViewModel editVM)
         {
             if (!ModelState.IsValid)
             {
@@ -119,10 +119,8 @@ namespace StartLine_social_network.Controllers
                 return View(editVM);
             }
 
-            user.Address.City = editVM.Address.City;
-            user.Address.Street = editVM.Address.Street;
-            user.Address.Province = editVM.Address.Province;
-            user.ProfileName = editVM.ProfileName;
+            user.City = editVM.City;
+            user.Province= editVM.Province;
 
             await _userManager.UpdateAsync(user);
 
