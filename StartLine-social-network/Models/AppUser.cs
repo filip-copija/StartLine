@@ -13,7 +13,8 @@ namespace StartLine_social_network.Models
         public string? City { get; set; }
         public string? Province { get; set; }
         public string? ProfileImageUrl { get; set; }
-        public ICollection<Club>? Clubs { get; set;}
+        public ICollection<Club>? Clubs { get; set; }
         public ICollection<Party>? Parties { get; set; }
+        public string? Description { get; set; }
     }
 }

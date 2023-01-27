@@ -14,12 +14,12 @@
                       <p class="card-text">@item.Description</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                           <a type=" btn button-success" asp-controller="Party" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Details</a>
+                           <a type=" btn button-success" asp-controller="Party" asp-action="Detail" asp-route-id="@item.Id" class="btn float-right btn-outline-secondary me-2">View</a>
 
                                     @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                                     {
-                                        <a type=" btn button-success" asp-controller="Party" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                        <a type=" btn button-danger" asp-controller="Party" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <a asp-controller="Party" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary float-right me-2">Edit</a>
+                                        <a asp-controller="Party" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-secondary float-right">Delete</a>
                                     }
                         </div>
                         <small class="text-muted">@item.StartTime</small>

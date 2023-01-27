@@ -4,40 +4,39 @@
 @{
     ViewData["Title"] = "Log in";
 }
+
+@if(TempData["Error"] != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Sorry!</b> - @TempData["Error"]</span>
+    </div>
+}
 <div class="row">
-    <div class="col-md-6 offset-3">
-        <p>
-            <h4>Log in to your account</h4>
-        </p>
-
-        @if(TempData["Error"] != null)
-        {
-            <div class="col-md-12 alert alert-danger">
-                <span><b>Sorry!</b> - @TempData["Error"]</span>
-            </div>
-        }
-        <div class="row">
-            <div class="col-md-8 offset-2">
+    <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="card mt-5">
+                <div class="card-body">
+                <h4 class="text-center mb-3">Log in to your account</h4>
                 <form asp-action="Login">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="EmailAddress" class="control-label"></label>
-                        <input asp-for="EmailAddress" class="form-control">
-                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
-                    </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mt-4">
+                    <label asp-for="EmailAddress" class="control-label"></label>
+                    <input asp-for="EmailAddress" class="form-control mb-3">
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
+                <div class="form-group mt-4">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
 
-                    <div class="form-group">
-                        <input class="btn btn-outline-success float right" type="submit" value="Log in" />
-                        <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Cancel</a>
-                    </div>
-                </form>
-            </div>
+                <div class="form-group mt-4">
+                    <input class="btn btn-outline-success float right" type="submit" value="Log in" />
+                    <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Cancel</a>
+                </div>
+            </form>
         </div>
+        </div>      
     </div>
 </div>

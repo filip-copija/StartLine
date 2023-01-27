@@ -1,4 +1,5 @@
 ﻿@using StartLine_social_network.ViewModels
+
 @model EditProfileViewModel
 
 <div class="main-container">
@@ -15,33 +16,6 @@
         <div class="bg-white">
             <div class="container">
                 <div class="row">
-                    <div class="col">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active"
-                                   id="overview-tab"
-                                   data-toggle="tab"
-                                   href="#profile"
-                                   role="tab"
-                                   aria-selected="true">Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   id="security-tab"
-                                   data-toggle="tab"
-                                   href="#security"
-                                   role="tab"
-                                   aria-selected="false">Security</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   id="notifications-tab"
-                                   data-toggle="tab"
-                                   href="#notifications"
-                                   role="tab"
-                                   aria-selected="false">Notifications</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -49,26 +23,23 @@
     </section>
     <section class="flush-with-above height-80 d-block">
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="profile" role="tabpanel">
+            <div class="tab-pane fade show active">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="media flex-wrap mb-0 align-items-center">
                                 <div class="media-body">
                                     <form asp-action="EditProfile" enctype="multipart/form-data">
-                                        <label asp-for="Image" class="custom-file mb-2" for="file2">
-                                            <input asp-for="Image" type="file" id="file2" class="custom-file-input height-0" oninput="submitProfileImage();" />
-                                            <span class="btn btn-primary"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</span>
+                                            <input asp-for="Image" type="file" />
+                                            <span class="btn btn-primary">Upload</span>
                                             <span asp-validation-for="Image" class="text-danger"></span>
                                             <button id="submit-image-button" type="submit" hidden></button>
                                         </label>
                                         <div>
                                             <small>For best results, use an image at least 256px by 256px in either .jpg or .png format</small>
                                         </div>
-
                                         <input asp-for="City" hidden />
                                         <input asp-for="Province" hidden />
-
                                     </form>
                                 </div>
                             </div>
@@ -101,15 +72,11 @@
                                     <div class="form-group">
                                         <label for="about-me">About me:</label>
                                         <textarea class="form-control form-control-lg"
-                                                  name="profileBio"
                                                   rows="4"
                                                   id="about-me"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">Save changes</button>
-                                    </div>
                                 </div>
                             </form>
                         </div>

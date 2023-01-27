@@ -1,14 +1,13 @@
 ﻿@model Club
 
-
-<li class="breadcrumb-item active" aria-current="page">@Model.ClubCategory Club in @Model.Address.City, @Model.Address.Province</li>
-
 <div class="col-lg-7 mb-4 mb-sm-0">
     <img alt="Image" src="@Model.Image" class="rounded img-fluid"/>
-        <div class="col-lg-4 d-flex flex-column justify-content-between mr-auto ml-auto">
-            <h1 class="mb-2">@Model.Title</h1>
-            <h1 class="mb-2">@Model.Description</h1>
-            <h2 class="lead mb-3">@Model.Address.City, @Model.Address.Province</h2>
-            <span class="badge badge-secondary mr-3">@Model.ClubCategory</span>
-        </div>
+    <li class="breadcrumb-item active mt-3" aria-current="page">@Model.ClubCategory Club in @Model.Address.City, @Model.Address.Province</li>
+
+<div class="text-justify mt-3">
+    <h1 class="mb-2">@Model.Title</h1>
+    <h2 class="ml-5 mt-2">@Model.Description</h2>
+    <h3 class="font-weight-light mt-6">@Model.Address.City, @Model.Address.Province</h3>
+    <h3 class="font-weight-light mt-2">@Model.ClubCategory </h3>
+</div>
   

@@ -33,7 +33,8 @@ namespace StartLine_social_network.Controllers
                     City = user.City,
                     Province = user.Province,
                     UserName = user.UserName,
-                    ProfileImageUrl = user.ProfileImageUrl ?? "\\resources\\avatar-male.jpg",
+                    Description = user.Description,
+                    ProfileImageUrl = user.ProfileImageUrl ?? "/resources/avatar-male.jpg",
                 };
                 result.Add(userViewModel);
             }
@@ -55,13 +56,13 @@ namespace StartLine_social_network.Controllers
                 City = user.City,
                 Province = user.Province,
                 UserName = user.UserName,
-                ProfileImageUrl = user.ProfileImageUrl ?? "\\resources\\avatar-male.jpg",
+                Description = user.Description,
+                ProfileImageUrl = user.ProfileImageUrl ?? "/resources/avatar-male.jpg",
             };
             return View(userDetailViewModel);
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> EditProfile()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -74,13 +75,13 @@ namespace StartLine_social_network.Controllers
             var editMV = new EditProfileViewModel()
             {
                 UserName = user.UserName,
+                Description = user.Description,
                 ProfileImageUrl = user.ProfileImageUrl
             };
             return View(editMV);
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> EditProfile(EditProfileViewModel editVM)
         {
             if (!ModelState.IsValid)
@@ -121,6 +122,7 @@ namespace StartLine_social_network.Controllers
 
             user.City = editVM.City;
             user.Province= editVM.Province;
+            user.Description = editVM.Description;
 
             await _userManager.UpdateAsync(user);
 

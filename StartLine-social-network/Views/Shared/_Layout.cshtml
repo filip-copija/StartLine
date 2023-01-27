@@ -21,64 +21,33 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">STARTLINE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                       @if (SignInManager.IsSignedIn(User))
+              <a class="nav-bar" asp-controller="Home" asp-action="Index">StartLine</a>    
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav me-auto">
+                        @if (SignInManager.IsSignedIn(User))
                         {
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle p-lg-0" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        @if (!string.IsNullOrEmpty(currentUser.ProfileImageUrl))
-                                        {
-                                            <img alt="Image" src="@currentUser.ProfileImageUrl" class="avatar avatar-xs">
-                                        }
-                                        else
-                                        {
-                                            <img alt="Image" src="\resources\avatar-male.jpg" class="avatar avatar-xs">
-                                        }
-                                    </a>
-                                    <div class="navbar-nav">
-                                        <a class="dropdown-item" asp-controller="User" asp-action="Detail" asp-route-id="@currentUser.Id">
-                                            <span  class="nav-item">View Profile</span>
-                                        </a>
-
-                                        <a class="dropdown-item" asp-controller="User" asp-action="EditProfile">
-                                            <span  class="nav-item">Edit Profile</span>
-                                        </a>
-
-                                        <a class="dropdown-item" asp-area="" asp-controller="Club" asp-action="Create">
-                                            <span  class="nav-item">Create Club</span>
-                                        </a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Party" asp-action="Create">
-                                            <span  class="nav-item">Create Party</span>
-                                        </a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
-                                            <span  class="nav-item btn btn-outline-danger">Log out</span>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
+                             <a class="nav-link" asp-controller="Club" asp-action="Create">Create Club</a>
+                             <a class="nav-link" asp-controller="Party" asp-action="Create">Create Party</a> 
+                             <a class="nav-link" asp-controller="Club" asp-action="Index">Clubs</a>
+                             <a class="nav-link" asp-controller="Party" asp-action="Index">Parties</a> 
+                             <a class="nav-link" asp-controller="User" asp-action="EditProfile">Edit Profile</a>
+                             <a class="nav-link" asp-controller="User" asp-action="Index">Users</a> 
+                             <a class="nav-link" asp-controller="Account" asp-action="Logout">Log out</a> 
                         }
                         else
                         {
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a asp-area="" asp-controller="Account" asp-action="Register">Sign up</a>
-                                    <span>&nbsp;or&nbsp;</span>
-                                    <a asp-area="" asp-controller="Account" asp-action="Login">Sign in</a>
-                                </li>
-                            </ul>
+                             <a class="nav-link" asp-controller="Account" asp-action="Register">Sign up</a>
+                             <a class="nav-link" asp-controller="Account" asp-action="Login">Sign in</a>    
                         }
-                   </ul>
+
                 </div>
             </div>
+          </div>
         </nav>
     </header>
     <div class="container">

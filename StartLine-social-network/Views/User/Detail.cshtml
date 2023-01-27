@@ -2,69 +2,14 @@
 
 @model UserDetailViewModel
 
+<div class="col-lg-7 mb-4 mb-sm-0">
+    <img alt="Image" src="@Model.ProfileImageUrl" class="rounded img-fluid"/>
+</div>
 
-<div class="main-container">
-    <nav aria-label="breadcrumb" role="navigation" class="bg-primary text-white">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col">
-                    <ol>
-                        <li>
-                            <a>Home</a>
-                        </li>
-                        <li>
-                            <a">Clubbers</a>
-                        </li>
-                        <li>Profile</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <section>
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <img alt="Image" src="@Model.ProfileImageUrl">
-                        <div>
-                            <div >
-                                <h1>@Model.UserName</h1>
-                                <span>@Model.City</span>
-                            </div>
-                            <p>
-                                test test test
-                            </p>
-                            <div>
-                                <button class="btn btn-outline-primary></button>
-                                <button class="btn btn-outline-primary"></button>
-                                <div>
-                                    <div>
-                                        <a class>Add to group</a>
-                                        <a class>Share Profile</a>
-                                        <a class>Block</a>
-                                        <a class>Report</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<section>
-        <div>
-            <div>
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" aria-controls="followers" aria-selected="false">Followers</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="text-justify mt-5">
+    <h1 class="mb-2">@Model.UserName</h1>
+    <h2 class="ml-5 mt-2">@Model.Description</h2>
+    <h3 class="font-weight-light mt-6">@Model.City, @Model.Province</h3>
+    <h3 class="font-weight-light mt-2">Clubber, @Model.UserName </h3>
+</div>
+

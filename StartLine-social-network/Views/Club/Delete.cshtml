@@ -1,23 +1,30 @@
 ﻿@using StartLine_social_network.Data.Enum
 @model Club
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">    
+<head>
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"> 
+</head>
+
+<body>
   <asp:Panel ID="pnlAlertBox" runat="server" style="position absolute top 0">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Notification</h4>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete @Model.Title?
-                </div>
-                <div class="modal-footer">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Notification</h4>
+        </div>
+            <div class="modal-body">
+            Are you sure you want to delete @Model.Title?
+        </div>
+            <div class="modal-footer">
                 <form action="Delete" method="post">
-                    <input type="hidden" asp-for="Id"/>
-                        <a type="btn button-success" asp-controller="Club" asp-action="Return" class="btn btn-outline-secondary mt-3">Return</a>
-                        <input type="submit" class="btn btn-outline-danger mt-3" Text="Delete"/>
+                <input type="hidden" asp-for="Id"/>
+                <a type="btn button-success" asp-controller="Club" asp-action="Return"
+                    class="btn btn-outline-secondary mt-3">Return</a>
+                <input type="submit" class="btn btn-outline-danger mt-4" value="Delete"/>
                 </form>
                 </div>
             </div>
         </div>
-</asp:Panel>
+    </asp:Panel>
+</body> 
+
