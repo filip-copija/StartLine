@@ -1,18 +1,55 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<AppUser> UserManager
+@inject SignInManager<AppUser> SignInManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-
+@if (!SignInManager.IsSignedIn(User))
+ {
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Start<u>Line</u></h1>
-        <p class="lead text-muted">Start with joy...</p>
-        <p class="lead text-muted">Start with party...</p>
-        <p>
-          <a asp-controller="Club" asp-action="Index" class="btn btn-primary my-2">See the clubs!</a>
-          <a asp-controller="Party" asp-action="Index" class="btn btn-secondary my-2">Check out parties!</a>
-        </p>
-      </div>
+        <div>
+            <h1>Start<u>Line</u></h1>
+            <p class="lead text-muted">Find a club...</p>
+            <p class="lead text-muted">Start the party...</p>
+             <br>
+            <h1>About us</h1>
+            <p class="lead text">
+                We created a page for people who loves to party. <br/>
+                You can find here clubs as well the parties with <br/>
+                all details you have to know before you go out to have fun. <br/>
+                Soon you will be able to find some new friends here. <br/>
+            </p>
+            <br>
+            <h2>We keep developing!</h2>
+            <p class="lead text">Keep it on mind ;)</p>
+        </div>
     </div>
   </section>
+ }
+
+ @if (SignInManager.IsSignedIn(User))
+{
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div>
+            <h1>About us</h1>
+            <p class="lead text">
+                We created a page for people who loves to party. <br/>
+                You can find here clubs as well the parties with <br/>
+                all details you have to know before you go out to have fun. <br/>
+                Soon you will be able to find some new friends here. <br/>
+            </p>
+            <h2>We keep developing!</h2>
+            <p class="lead text">Keep it on mind ;)</p>
+        </div>
+    </div>
+  </section>
+}

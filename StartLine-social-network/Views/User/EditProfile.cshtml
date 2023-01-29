@@ -30,14 +30,6 @@
                             <div class="media flex-wrap mb-0 align-items-center">
                                 <div class="media-body">
                                     <form asp-action="EditProfile" enctype="multipart/form-data">
-                                            <input asp-for="Image" type="file" />
-                                            <span class="btn btn-primary">Upload</span>
-                                            <span asp-validation-for="Image" class="text-danger"></span>
-                                            <button id="submit-image-button" type="submit" hidden></button>
-                                        </label>
-                                        <div>
-                                            <small>For best results, use an image at least 256px by 256px in either .jpg or .png format</small>
-                                        </div>
                                         <input asp-for="City" hidden />
                                         <input asp-for="Province" hidden />
                                     </form>

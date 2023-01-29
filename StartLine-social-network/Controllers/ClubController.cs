@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StartLine_social_network.Data;
 using StartLine_social_network.Data.Interfaces;
@@ -41,6 +42,7 @@ namespace StartLine_social_network.Controllers
             return View(createClubViewModel);
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateClubViewModel clubVM)
         {
             if(ModelState.IsValid)
@@ -93,6 +95,7 @@ namespace StartLine_social_network.Controllers
             return View(clubVM);
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, EditClubViewModel clubVM)
         {
             if (!ModelState.IsValid)
@@ -147,6 +150,7 @@ namespace StartLine_social_network.Controllers
             return View(clubInfo);
         }
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         // Delete data
         public async Task<IActionResult> DeleteClub(int id)
         {

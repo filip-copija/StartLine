@@ -19,7 +19,7 @@ namespace StartLine_social_network.Controllers
             _userManager = userManager;
             _photoService = photoService;
         }
-
+        [Authorize]
         [HttpGet("users")]
         public async Task<IActionResult> Index()
         {
@@ -40,7 +40,7 @@ namespace StartLine_social_network.Controllers
             }
             return View(result);
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Detail(string id)
         {
@@ -61,7 +61,7 @@ namespace StartLine_social_network.Controllers
             };
             return View(userDetailViewModel);
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> EditProfile()
         {
@@ -80,7 +80,7 @@ namespace StartLine_social_network.Controllers
             };
             return View(editMV);
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> EditProfile(EditProfileViewModel editVM)
         {

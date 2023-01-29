@@ -2,7 +2,6 @@
 
 @inject UserManager<AppUser> UserManager
 @inject SignInManager<AppUser> SignInManager
-
 @{
     var currentUser = await UserManager.GetUserAsync(User);
 }
@@ -21,35 +20,65 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-              <a class="nav-bar" asp-controller="Home" asp-action="Index">StartLine</a>    
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">START<u>LINE</u></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav me-auto">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                             <a class="nav-link" asp-controller="Club" asp-action="Create">Create Club</a>
-                             <a class="nav-link" asp-controller="Party" asp-action="Create">Create Party</a> 
-                             <a class="nav-link" asp-controller="Club" asp-action="Index">Clubs</a>
-                             <a class="nav-link" asp-controller="Party" asp-action="Index">Parties</a> 
-                             <a class="nav-link" asp-controller="User" asp-action="EditProfile">Edit Profile</a>
-                             <a class="nav-link" asp-controller="User" asp-action="Index">Users</a> 
-                             <a class="nav-link" asp-controller="Account" asp-action="Logout">Log out</a> 
-                        }
-                        else
-                        {
-                             <a class="nav-link" asp-controller="Account" asp-action="Register">Sign up</a>
-                             <a class="nav-link" asp-controller="Account" asp-action="Login">Sign in</a>    
-                        }
-
-                </div>
+            </button>
+            <div class="navbar-collapse collapse show" id="navbarColor01" style="">
+                <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" asp-controller="Home" asp-action="Index">Home
+                    <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Club" asp-action="Index">Clubs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Party" asp-action="Index">Parties</a> 
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Create</a>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" asp-controller="Club" asp-action="Create">Create Club</a>
+                    <a class="dropdown-item" asp-controller="Party" asp-action="Create">Create Party</a> 
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account settings</a>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" asp-controller="User" asp-action="EditProfile">Edit Profile</a> 
+                    <a class="dropdown-item" asp-controller="User" asp-action="Index">Users</a> 
+                </li>
+                </ul>
+                <form class="d-flex">
+                <a class="btn btn-secondary my-2 my-sm-0" asp-controller="Account" asp-action="Logout">Log out</a> 
+                </form>
             </div>
-          </div>
-        </nav>
-    </header>
+            </div>
+            </nav>
+        }
+        else
+        {
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">START<u>LINE</u></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse show" id="navbarColor01" style="">
+                <form class="d-flex">
+                    <a class="btn btn-secondary my-2 my-sm-0 me-4" asp-controller="Account" asp-action="Register">Sign up</a>
+                    <a class="btn btn-secondary my-2 my-sm-0" asp-controller="Account" asp-action="Login">Sign in</a>  
+                </form>
+            </div>
+            </div>
+            </nav>
+        }
+</header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
