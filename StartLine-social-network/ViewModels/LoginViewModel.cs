@@ -7,7 +7,7 @@ namespace StartLine_social_network.ViewModels
         [Display(Name = "Email Address")]
         [Required(ErrorMessage = "Email address is required")]
         public string EmailAddress { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wrong password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

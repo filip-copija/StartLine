@@ -45,12 +45,12 @@ namespace StartLine_social_network.Controllers
         [Authorize]
         public async Task<IActionResult> Create(CreateClubViewModel clubVM)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var result = await _photoService.AddPhotoAsync(clubVM.Image);
 
                 var club = new Club
-                { 
+                {
                     Title = clubVM.Title,
                     Description = clubVM.Description,
                     Image = result.Url.ToString(),
@@ -58,14 +58,14 @@ namespace StartLine_social_network.Controllers
                     Address = new Address
                     {
                         City = clubVM.Address.City,
-                        Street = clubVM.Address.Street,                     
+                        Street = clubVM.Address.Street,
                         Province = clubVM.Address.Province,
                     },
                     ClubCategory = clubVM.ClubCategory,
                 };
                 _clubService.Add(club);
                 return RedirectToAction("Index");
-            }         
+            }
             else
             {
                 ModelState.AddModelError("", "Photo upload failed");
@@ -89,7 +89,7 @@ namespace StartLine_social_network.Controllers
                     City = club.Address.City,
                     Street = club.Address.Street,
                     Province = club.Address.Province,
-                },               
+                },
                 ClubCategory = club.ClubCategory
             };
             return View(clubVM);

@@ -28,7 +28,6 @@ namespace StartLine_social_network.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid) return View(loginViewModel);
@@ -65,7 +64,6 @@ namespace StartLine_social_network.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
             if (!ModelState.IsValid) return View(registerViewModel);
