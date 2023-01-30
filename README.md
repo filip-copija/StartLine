@@ -8,8 +8,10 @@
  - 2.Open the solution in Visual Studio
  - 3.In the appsettings.json file, change the connection string to match your database settings
  - 4.Open the Package Manager Console and run the command   
-``Update-Database``
- - 5.Build and run the application
+``update-database``
+ - 5.In console type command: <br>
+ ``dotnet run seeddata``
+ - 6.Build and run the application
  
  ## Technologies Used
 - ASP.NET MVC
