@@ -2,78 +2,37 @@
 
 @model EditProfileViewModel
 
-<div class="main-container">
-    <section class="bg-white space-sm pb-4">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-auto">
-                    <h1 class="h2">Account Settings</h1>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="flush-with-above space-0">
-        <div class="bg-white">
-            <div class="container">
-                <div class="row">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="flush-with-above height-80 d-block">
-        <div class="tab-content">
-            <div class="tab-pane fade show active">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="media flex-wrap mb-0 align-items-center">
-                                <div class="media-body">
-                                    <form asp-action="EditProfile" enctype="multipart/form-data">
-                                        <input asp-for="City" hidden />
-                                        <input asp-for="Province" hidden />
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row mb-4">
-                        <div class="col">
-                            <h5>Profile Information</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-8 order-md-1">
-                            <form asp-action="EditProfile" method="post" class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label asp-for="City">City:</label>
-                                        <input asp-for="City" type="text" class="form-control form-control-lg" />
-                                        <span asp-validation-for="City" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label asp-for="Province">Province:</label>
-                                        <input asp-for="Province" type="text" class="form-control form-control-lg" />
-                                        <span asp-validation-for="Province" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="about-me">About me:</label>
-                                        <textarea class="form-control form-control-lg"
-                                                  rows="4"
-                                                  id="about-me"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<form>
+  <fieldset>
+
+    <legend>Account settings</legend>
+
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="@Model.UserName">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label mt-4">City</label>
+      <input asp-for="City" class="form-control form-control-lg" />
+      <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+      <div class="form-group">
+      <label class="form-label mt-4">Province</label>
+      <input asp-for="Province" class="form-control form-control-lg" />
+      <span asp-validation-for="Province" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleTextarea" class="form-label mt-4">About me</label>
+      <input asp-for="Province"  class="form-control form-control-lg" />
+      <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </fieldset>
+</form>
